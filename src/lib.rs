@@ -31,7 +31,7 @@ impl Web3 {
     ///
     /// ## Example
     /// ```rust
-    /// use coinmarket::web3::Web3;
+    /// use web3scan::Web3;
     ///
     /// fn main() {
     ///
@@ -43,7 +43,7 @@ impl Web3 {
     ///
     /// }
     /// ```
-    pub fn get_balance<S: Into<String>>(&self, address: S) -> Result<String, Error>
+    pub async fn get_balance<S: Into<String>>(&self, address: S) -> Result<String, Error>
     where
         S: Into<String>,
     {
@@ -53,8 +53,11 @@ impl Web3 {
             address.into(),
             get_api_key().as_str()
         );
-        let mut response = reqwest::get(&request)?;
-        let balance: Etherscan<String> = response.json()?;
+        let response = reqwest::get(&request)
+            .await?
+            .json::<Etherscan<String>>()
+            .await?;
+        let balance: Etherscan<String> = response;
 
         Ok(balance.result)
     }
@@ -63,7 +66,7 @@ impl Web3 {
     ///
     /// ## Example
     /// ```rust
-    /// use coinmarket::web3::Web3;
+    /// use web3scan::Web3;
     ///
     /// fn main() {
     ///
@@ -74,14 +77,17 @@ impl Web3 {
     ///
     /// }
     /// ```
-    pub fn get_total_supply(&self) -> Result<String, Error> {
+    pub async fn get_total_supply(&self) -> Result<String, Error> {
         let request = format!(
             "{}stats&action=ethsupply{}",
             self.provider,
             get_api_key().as_str()
         );
-        let mut response = reqwest::get(&request)?;
-        let taken_supply: Etherscan<String> = response.json()?;
+        let response = reqwest::get(&request)
+            .await?
+            .json::<Etherscan<String>>()
+            .await?;
+        let taken_supply: Etherscan<String> = response;
 
         Ok(taken_supply.result)
     }
@@ -90,7 +96,7 @@ impl Web3 {
     ///
     /// ## Example
     /// ```rust
-    /// use coinmarket::web3::Web3;
+    /// use web3scan::Web3;
     ///
     /// fn main() {
     ///
@@ -101,14 +107,18 @@ impl Web3 {
     ///
     /// }
     /// ```
-    pub fn get_last_price(&self) -> Result<EvmPrice, Error> {
+    pub async fn get_last_price(&self) -> Result<EvmPrice, Error> {
         let request = format!(
             "{}stats&action=ethprice{}",
             self.provider,
             get_api_key().as_str()
         );
-        let mut response = reqwest::get(&request)?;
-        let last_price: Etherscan<EvmPrice> = response.json()?;
+        let response = reqwest::get(&request)
+            .await?
+            .json::<Etherscan<EvmPrice>>()
+            .await?;
+        let last_price: Etherscan<EvmPrice> = response;
+
         Ok(last_price.result)
     }
 
@@ -116,7 +126,7 @@ impl Web3 {
     ///
     /// ## Example
     /// ```rust
-    /// use coinmarket::web3::Web3;
+    /// use web3scan::Web3;
     ///
     /// fn main() {
     ///
@@ -127,7 +137,7 @@ impl Web3 {
     ///
     /// }
     /// ```
-    pub fn get_transactions<S: Into<String>>(
+    pub async fn get_transactions<S: Into<String>>(
         &self,
         address: S,
         start_block: i64,
@@ -145,8 +155,12 @@ impl Web3 {
             get_api_key().as_str()
         );
 
-        let mut response = reqwest::get(&request)?;
-        let balance: Etherscan<Vec<EvmTransaction>> = response.json()?;
+        let response = reqwest::get(&request)
+            .await?
+            .json::<Etherscan<Vec<EvmTransaction>>>()
+            .await?;
+
+        let balance: Etherscan<Vec<EvmTransaction>> = response;
 
         Ok(balance.result)
     }

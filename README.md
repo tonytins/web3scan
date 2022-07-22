@@ -2,13 +2,22 @@
 
 [![GitHub license](https://img.shields.io/github/license/tonytins/web3scan)](https://github.com/tonytins/web3scan/blob/main/LICENSE) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/tonytins/web3scan/Rust/main) ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/tonytins/web3scan)  [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
 
-A descendant from the [CoinMarket](https://crates.io/crates/coinmarket) library, Web3Scan is a used for gathering information from EVM-based networks using Etherscan's API.
+A descendant from the [web3scan](https://crates.io/crates/web3scan) library, Web3Scan is a used for gathering information from EVM-based networks using Etherscan's API.
 
 ## Installation
 
 ```toml
 [dependencies]
-coinmarket = "0.1"
+web3scan = "0.1"
+tokio = { version = "1", features = ["full"] }
+```
+
+### Development
+
+```toml
+[dependencies]
+web3scan = { git = "https://github.com/tonytins/web3scan", branch = "develop" }
+tokio = { version = "1", features = ["full"] }
 ```
 
 ## Example
