@@ -23,7 +23,7 @@ use web3scan::Web3;
 pub fn main() {
     let network = Web3::new("api.etherscan.io");
     let balance = network
-    .ether_balance("0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B")
+    .get_balance("0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B")
     .expect("Parsing error");
 
     println!("{}", balance);
