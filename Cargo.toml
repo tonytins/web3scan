@@ -1,6 +1,6 @@
 [package]
 name = "web3scan"
-version = "0.1.100"
+version = "0.2.100"
 edition = "2021"
 authors = ["Tony Bark"]
 description = "Web3Scan is a used for gathering information from EVM-based networks using Etherscan's API."
@@ -11,7 +11,8 @@ license = "BSD-3-Clause OR Unlicense"
 repository = "https://github.com/tonytins/web3scan"
 
 [dependencies]
-reqwest = "0.9"
-serde_json = "1.0"
-serde = { version = "1.0", features = ["derive"]}
+reqwest = { version = "0.11", features = ["json"] }
+tokio = { version = "1", features = ["full"] }
+serde_json = "1"
+serde = { version = "1", features = ["derive"]}
 dotenv = "0.15"
