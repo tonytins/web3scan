@@ -30,4 +30,4 @@ pub fn main() {
 
 ## License
 
-This project is dual-licensed under the [BSD-3-Clause](COPYING) or the [UNLICENSE](UNLICENSE).
+In jurisdictions that recognize copyright waivers, I've [waived all copyright](LICENSE-WAIVER) and related or neighboring rights for to this project. In areas where these waivers are not recognized, [BSD-3-Clause](LICENSE-BSD) is enforced.
